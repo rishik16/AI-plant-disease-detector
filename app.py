@@ -1,12 +1,12 @@
 import streamlit as st
 import numpy as np
 from PIL import Image
-import tflite_runtime.interpreter as tflite
+import tensorflow as tf
 
 # -------------------------------
-# LOAD MODEL (TFLITE)
+# LOAD TFLITE MODEL
 # -------------------------------
-interpreter = tflite.Interpreter(model_path="model.tflite")
+interpreter = tf.lite.Interpreter(model_path="model.tflite")
 interpreter.allocate_tensors()
 
 input_details = interpreter.get_input_details()
@@ -23,7 +23,7 @@ with open("labels.txt", "r") as f:
 # -------------------------------
 treatments = {
     "Tomato___Early_blight": "Remove infected leaves and apply fungicide.",
-    "Tomato___Late_blight": "Use fungicide and avoid excess moisture.",
+    "Tomato___Late_blight": "Use fungicide and avoid moisture.",
     "Tomato___healthy": "Plant is healthy.",
     "Potato___Early_blight": "Use fungicide and crop rotation.",
     "Potato___Late_blight": "Destroy infected plants.",
